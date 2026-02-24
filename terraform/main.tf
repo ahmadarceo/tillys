@@ -12,7 +12,7 @@ variable "zone_id" {
   sensitive = true
 }
 
-variable "server_ip" {
+variable "server_ipv4" {
   type = string
 }
 
@@ -20,7 +20,7 @@ resource "cloudflare_dns_record" "apex" {
   zone_id = var.zone_id
   type    = "A"
   name    = "@"
-  content = var.server_ip
+  content = var.server_ipv4
   ttl     = 1
   proxied = true
 }
@@ -29,7 +29,7 @@ resource "cloudflare_dns_record" "www" {
   zone_id = var.zone_id
   type    = "A"
   name    = "www"
-  content = var.server_ip
+  content = var.server_ipv4
   ttl     = 1
   proxied = true
 }
