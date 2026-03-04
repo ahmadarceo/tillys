@@ -34,7 +34,7 @@ jobs:
       run: terraform plan -var="zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}" -var="server_ipv4=${{ github.event.inputs.ip }}"
 
     - name: Terraform Apply
-      if: github.event_name == 'repository_dispatch'
+      if: github.event_name == 'workflow_dispatch'
       working-directory: terraform
       run: terraform apply -var="zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}" -var="server_ipv4=${{ github.event.inputs.ip }}" -auto-approve
 
