@@ -27,12 +27,12 @@ jobs:
 
     - name: Terraform Plan
       working-directory: terraform
-      run: terraform plan -var="zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}" -var="record_value=${{ github.event.client_payload.ip }}"
+      run: terraform plan -var="zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}" -var="server_ipv4=${{ github.event.client_payload.ip }}"
 
     - name: Terraform Apply
       if: github.event_name == 'repository_dispatch'
       working-directory: terraform
-      run: terraform apply -var="zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}" -var="record_value=${{ github.event.client_payload.ip }}" -auto-approve
+      run: terraform apply -var="zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}" -var="server_ipv4=${{ github.event.client_payload.ip }}" -auto-approve
 
     - name: Post deployment summary
       if: always()
