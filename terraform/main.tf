@@ -34,6 +34,15 @@ resource "cloudflare_dns_record" "www" {
   proxied = true
 }
 
+resource "cloudflare_dns_record" "test" {
+  zone_id = var.zone_id
+  type    = "A"
+  name    = "www"
+  content = var.server_ipv4
+  ttl     = 1
+  proxied = true
+}
+
 resource "cloudflare_zone_setting" "always_online" {
   zone_id    = var.zone_id
   setting_id = "always_online"
